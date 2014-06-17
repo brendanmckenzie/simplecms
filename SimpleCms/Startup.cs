@@ -10,6 +10,8 @@ namespace SimpleCms
 {
     public static class Startup
     {
+        #region Public Methods
+
         public static void Initialise()
         {
             using (var context = ApplicationDbContext.Create())
@@ -17,11 +19,13 @@ namespace SimpleCms
                 foreach (var node in context.Nodes)
                 {
                     object defaults = null;
+                    string[] namespaces = new string[0];
 
                     switch (node.Type)
                     {
                         case NodeType.Redirect:
                             defaults = new { controller = "Redirect", action = "External", destination = node.Redirect };
+                            namespaces = new string[] { "SimpleCms.Controllers" };
                             break;
                         case NodeType.Mvc:
                             defaults = new { controller = node.Controller, action = node.Action, id = node.Id };
@@ -29,12 +33,16 @@ namespace SimpleCms
                         case NodeType.External:
                             continue;
                     }
-                    RouteTable.Routes.MapRoute(node.Id.ToString(), node.GetUrlPath(), defaults);
+                    RouteTable.Routes.MapRoute(node.Id.ToString(), node.GetUrlPath(), defaults, null, namespaces);
                 }
             }
         }
 
-        private static string GetUrlPath(this Node page)
+        #endregion
+
+        #region Private Methods
+
+        static string GetUrlPath(this Node page)
         {
             var parent = page.Parent;
             if (parent == null)
@@ -52,5 +60,7 @@ namespace SimpleCms
                 return ret;
             }
         }
+
+        #endregion
     }
 }
