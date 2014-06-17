@@ -11,9 +11,9 @@ namespace SampleWebsite.Controllers
         // GET: Basic
         public ActionResult Page(Guid id)
         {
-            var page = SimpleCms.Helper.GetPage(id);
+            var document = SimpleCms.Helper.GetDocument(id);
 
-            return View(page);
+            return View(document);
         }
     }
 }

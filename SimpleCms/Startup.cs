@@ -12,18 +12,29 @@ namespace SimpleCms
     {
         public static void Initialise()
         {
-            // run through the pages and build the route table from that
-            // RouteTable
             using (var context = ApplicationDbContext.Create())
             {
-                foreach (var page in context.Pages)
+                foreach (var node in context.Nodes)
                 {
-                    RouteTable.Routes.MapRoute(page.Id.ToString(), page.GetUrlPath(), new { controller = page.Controller, action = page.Action, id = page.Id });
+                    object defaults = null;
+
+                    switch (node.Type)
+                    {
+                        case NodeType.Redirect:
+                            defaults = new { controller = "Redirect", action = "External", destination = node.Redirect };
+                            break;
+                        case NodeType.Mvc:
+                            defaults = new { controller = node.Controller, action = node.Action, id = node.Id };
+                            break;
+                        case NodeType.External:
+                            continue;
+                    }
+                    RouteTable.Routes.MapRoute(node.Id.ToString(), node.GetUrlPath(), defaults);
                 }
             }
         }
 
-        private static string GetUrlPath(this Page page)
+        private static string GetUrlPath(this Node page)
         {
             var parent = page.Parent;
             if (parent == null)

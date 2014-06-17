@@ -19,6 +19,8 @@ namespace SimpleCms.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Page> Pages { get; set; }
+        public DbSet<Node> Nodes { get; set; }
+
+        public DbSet<DocumentType> DocumentTypes { get; set; }
     }
 }
