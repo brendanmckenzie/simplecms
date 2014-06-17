@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCms", "SimpleCms\SimpleCms.csproj", "{050AC40E-0381-4DA4-A36E-839218675A91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCms.Admin", "SimpleCms.Admin\SimpleCms.Admin.csproj", "{22519C5C-9E0B-4E40-B973-9AC2B1DA2F5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebsite", "SampleWebsite\SampleWebsite.csproj", "{3B780F2E-D796-4DD1-9C76-CB9B4767791D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{050AC40E-0381-4DA4-A36E-839218675A91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050AC40E-0381-4DA4-A36E-839218675A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050AC40E-0381-4DA4-A36E-839218675A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050AC40E-0381-4DA4-A36E-839218675A91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22519C5C-9E0B-4E40-B973-9AC2B1DA2F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22519C5C-9E0B-4E40-B973-9AC2B1DA2F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22519C5C-9E0B-4E40-B973-9AC2B1DA2F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22519C5C-9E0B-4E40-B973-9AC2B1DA2F5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B780F2E-D796-4DD1-9C76-CB9B4767791D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B780F2E-D796-4DD1-9C76-CB9B4767791D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B780F2E-D796-4DD1-9C76-CB9B4767791D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B780F2E-D796-4DD1-9C76-CB9B4767791D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
