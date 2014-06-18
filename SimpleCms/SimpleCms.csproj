@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201406170631428_AddPages.Designer.cs">
       <DependentUpon>201406170631428_AddPages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406180210429_AddMissingTables.cs" />
+    <Compile Include="Migrations\201406180210429_AddMissingTables.Designer.cs">
+      <DependentUpon>201406180210429_AddMissingTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -112,6 +116,9 @@
     <EmbeddedResource Include="Migrations\201406170631428_AddPages.resx">
       <DependentUpon>201406170631428_AddPages.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406180210429_AddMissingTables.resx">
+      <DependentUpon>201406180210429_AddMissingTables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -119,8 +126,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v12.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -151,7 +157,18 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
 </Project>

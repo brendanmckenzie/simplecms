@@ -43,12 +43,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.1.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.1.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -158,9 +170,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\NodesController.cs" />
+    <Compile Include="Areas\Api\Models\NodePartial.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,14 +184,47 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="content\app\app.js" />
+    <Content Include="content\app\common\navigation-controller.js" />
+    <Content Include="content\app\common\header-controller.js" />
+    <Content Include="content\app\modules\home\home.html" />
+    <Content Include="content\app\modules\home\home.js" />
+    <Content Include="content\app\modules\home\home.spec.js" />
+    <Content Include="content\app\modules\nodes\nodes.html" />
+    <Content Include="content\app\modules\nodes\nodes.js" />
+    <Content Include="content\app\modules\nodes\nodes.spec.js" />
+    <Content Include="content\app\services\page.js" />
+    <Content Include="content\scripts.js">
+      <DependentUpon>scripts.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="content\scripts.min.js">
+      <DependentUpon>scripts.js</DependentUpon>
+    </Content>
+    <Content Include="content\Site.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
+    <Content Include="content\styles.css">
+      <DependentUpon>styles.css.bundle</DependentUpon>
+    </Content>
+    <Content Include="content\styles.min.css">
+      <DependentUpon>styles.css</DependentUpon>
+    </Content>
+    <Content Include="content\vendor\angular\angular-ui-router.js" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="content\Site.css.map">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
+    <Content Include="content\scripts.js.bundle" />
+    <Content Include="content\scripts.min.js.map">
+      <DependentUpon>scripts.min.js</DependentUpon>
+    </Content>
+    <None Include="content\Site.less" />
+    <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="content\styles.css.bundle" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -189,6 +237,41 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="content\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="content\vendor\bootstrap\js\affix.js" />
+    <Content Include="content\vendor\bootstrap\js\alert.js" />
+    <Content Include="content\vendor\bootstrap\js\button.js" />
+    <Content Include="content\vendor\bootstrap\js\carousel.js" />
+    <Content Include="content\vendor\bootstrap\js\collapse.js" />
+    <Content Include="content\vendor\bootstrap\js\dropdown.js" />
+    <Content Include="content\vendor\bootstrap\js\modal.js" />
+    <Content Include="content\vendor\bootstrap\js\popover.js" />
+    <Content Include="content\vendor\bootstrap\js\scrollspy.js" />
+    <Content Include="content\vendor\bootstrap\js\tab.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\index.html" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\affix.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\alert.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\button.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\carousel.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\collapse.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\dropdown.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\modal.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\phantom.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\popover.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\scrollspy.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\tab.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\unit\tooltip.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\vendor\jquery.js" />
+    <Content Include="content\vendor\bootstrap\js\tests\vendor\qunit.css" />
+    <Content Include="content\vendor\bootstrap\js\tests\vendor\qunit.js" />
+    <Content Include="content\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="content\vendor\bootstrap\js\transition.js" />
+    <Content Include="content\vendor\bootstrap\less\bootstrap.css">
+      <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
+    <Content Include="content\vendor\bootstrap\less\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -219,19 +302,65 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Pages\Create.cshtml" />
-    <Content Include="Views\Pages\Delete.cshtml" />
-    <Content Include="Views\Pages\Details.cshtml" />
-    <Content Include="Views\Pages\Edit.cshtml" />
-    <Content Include="Views\Pages\Index.cshtml" />
+    <Content Include="content\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="content\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="content\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="content\vendor\bootstrap\js\.jscs.json" />
+    <Content Include="content\vendor\bootstrap\js\.jshintrc" />
+    <Content Include="content\vendor\bootstrap\less\.csscomb.json" />
+    <Content Include="content\vendor\bootstrap\less\.csslintrc" />
+    <Content Include="content\vendor\bootstrap\less\alerts.less" />
+    <Content Include="content\vendor\bootstrap\less\badges.less" />
+    <Content Include="content\vendor\bootstrap\less\bootstrap.less" />
+    <Content Include="content\vendor\bootstrap\less\breadcrumbs.less" />
+    <Content Include="content\vendor\bootstrap\less\button-groups.less" />
+    <Content Include="content\vendor\bootstrap\less\buttons.less" />
+    <Content Include="content\vendor\bootstrap\less\carousel.less" />
+    <Content Include="content\vendor\bootstrap\less\close.less" />
+    <Content Include="content\vendor\bootstrap\less\code.less" />
+    <Content Include="content\vendor\bootstrap\less\component-animations.less" />
+    <Content Include="content\vendor\bootstrap\less\dropdowns.less" />
+    <Content Include="content\vendor\bootstrap\less\forms.less" />
+    <Content Include="content\vendor\bootstrap\less\glyphicons.less" />
+    <Content Include="content\vendor\bootstrap\less\grid.less" />
+    <Content Include="content\vendor\bootstrap\less\input-groups.less" />
+    <Content Include="content\vendor\bootstrap\less\jumbotron.less" />
+    <Content Include="content\vendor\bootstrap\less\labels.less" />
+    <Content Include="content\vendor\bootstrap\less\list-group.less" />
+    <Content Include="content\vendor\bootstrap\less\media.less" />
+    <Content Include="content\vendor\bootstrap\less\mixins.less" />
+    <Content Include="content\vendor\bootstrap\less\modals.less" />
+    <Content Include="content\vendor\bootstrap\less\navbar.less" />
+    <Content Include="content\vendor\bootstrap\less\navs.less" />
+    <Content Include="content\vendor\bootstrap\less\normalize.less" />
+    <Content Include="content\vendor\bootstrap\less\pager.less" />
+    <Content Include="content\vendor\bootstrap\less\pagination.less" />
+    <Content Include="content\vendor\bootstrap\less\panels.less" />
+    <Content Include="content\vendor\bootstrap\less\popovers.less" />
+    <Content Include="content\vendor\bootstrap\less\print.less" />
+    <Content Include="content\vendor\bootstrap\less\progress-bars.less" />
+    <Content Include="content\vendor\bootstrap\less\responsive-utilities.less" />
+    <Content Include="content\vendor\bootstrap\less\scaffolding.less" />
+    <Content Include="content\vendor\bootstrap\less\tables.less" />
+    <Content Include="content\vendor\bootstrap\less\theme.less" />
+    <Content Include="content\vendor\bootstrap\less\thumbnails.less" />
+    <Content Include="content\vendor\bootstrap\less\tooltip.less" />
+    <Content Include="content\vendor\bootstrap\less\type.less" />
+    <Content Include="content\vendor\bootstrap\less\utilities.less" />
+    <Content Include="content\vendor\bootstrap\less\variables.less" />
+    <Content Include="content\vendor\bootstrap\less\wells.less" />
+    <Content Include="content\vendor\bootstrap\less\bootstrap.css.map">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="content\app\models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

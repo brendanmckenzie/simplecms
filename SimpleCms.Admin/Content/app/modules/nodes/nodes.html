@@ -1,0 +1,11 @@
+﻿<div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li ng-class="{active:node.isSelected}" ng-repeat="node in rootNodes"><a href="#" ng-click="selectNode(node)">{{node.title}}</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-show="selectedNode">
+        <h1 class="page-header">{{selectedNode.Id}}</h1>
+        <p>Stuff goes here.</p>
+    </div>
+</div>
