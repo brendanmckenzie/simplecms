@@ -3293,11 +3293,17 @@ angular.module('SimpleCms.Modules.Nodes', [])
 
 .factory('Nodes', ['$http', function ($http) {
     return {
-        root: function () {
+        all: function () {
             return $http.get('/api/nodes');
         },
         get: function (id) {
             return $http.get('/api/nodes/' + id);
+        },
+        create: function (node) {
+            return $http.post('/api/nodes', node);
+        },
+        update: function (id, node) {
+            return $http.put('/api/nodes/' + id, node);
         }
     }
 }])
@@ -3305,9 +3311,13 @@ angular.module('SimpleCms.Modules.Nodes', [])
 .controller('NodesController', ['$scope', 'Page', 'Nodes', function ($scope, Page, Nodes) {
     Page.setTitle('Nodes');
 
-    Nodes.root().success(function (data, status, headers, config) {
-        $scope.rootNodes = data;
-    });
+    $scope.refresh = function () {
+        Nodes.all().success(function (data, status, headers, config) {
+            $scope.rootNodes = data;
+        });
+    }
+
+    $scope.refresh();
 
     $scope.selectNode = function (node) {
         angular.forEach($scope.rootNodes, function (_node) {
@@ -3315,7 +3325,7 @@ angular.module('SimpleCms.Modules.Nodes', [])
         });
         node.isSelected = true;
 
-        Nodes.get(node.id).success(function (data) {
+        Nodes.get(node.Id).success(function (data) {
             $scope.selectedNode = data;
         });
     };
@@ -3325,4 +3335,15 @@ angular.module('SimpleCms.Modules.Nodes', [])
 
         node.children.push({ title: 'new child' });
     }
+
+    $scope.createNode = {};
+
+    $scope.save = function (node) {
+        if (node.Id) {
+            Nodes.update(node.Id, node);
+        }
+        else {
+            Nodes.create(node);
+        }
+    };
 }]);

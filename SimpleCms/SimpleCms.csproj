@@ -102,6 +102,10 @@
     <Compile Include="Migrations\201406180210429_AddMissingTables.Designer.cs">
       <DependentUpon>201406180210429_AddMissingTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201406180704501_AddTitleToNode.cs" />
+    <Compile Include="Migrations\201406180704501_AddTitleToNode.Designer.cs">
+      <DependentUpon>201406180704501_AddTitleToNode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201406180210429_AddMissingTables.resx">
       <DependentUpon>201406180210429_AddMissingTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406180704501_AddTitleToNode.resx">
+      <DependentUpon>201406180704501_AddTitleToNode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

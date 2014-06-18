@@ -8,7 +8,7 @@
                 <button type="button" class="btn btn-default">Middle</button>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-default">Right</button>
+                <button type="button" class="btn btn-default" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i></button>
             </div>
         </div>
         <ul class="nav nav-sidebar">
@@ -16,15 +16,19 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-show="selectedNode">
-        <h1 class="page-header">{{selectedNode.Id}}</h1>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">{{selectedNode.Title}}</h1>
         <p>Stuff goes here.</p>
+        <form ng-submit="save(createNode)">
+            <input type="text" ng-model="createNode.Title" class="form-control" placeholder="Title" />
+            <button type="submit" class="btn btn-default">Save</button>
+        </form>
     </div>
 </div>
 
 
 <script type="text/ng-template" id="/node.html">
-    <a href="#" ng-click="selectNode(node)">{{node.title}}</a>
+    <a href="#" ng-click="selectNode(node)">{{node.Title}}</a>
     <button type="button" class="btn btn-default" ng-click="addChild(node)"><i class="glyphicon glyphicon-plus"></i></button>
     <ul ng-show="node.children">
         <li ng-class="{active:node.isSelected}" ng-repeat="node in node.children" ng-include="'/node.html'">

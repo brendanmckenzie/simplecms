@@ -15,6 +15,8 @@ namespace SimpleCms
 
         public Node Parent { get; set; }
 
+        public string Title { get; set; }
+
         public NodeType Type { get; set; }
 
         public string UrlKey { get; set; }
