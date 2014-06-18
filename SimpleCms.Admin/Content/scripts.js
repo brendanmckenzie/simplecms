@@ -3291,7 +3291,7 @@ angular.module('SimpleCms.Modules.Nodes', [])
     });
 }])
 
-.factory('Nodes', ['$http' ,function ($http) {
+.factory('Nodes', ['$http', function ($http) {
     return {
         root: function () {
             return $http.get('/api/nodes');
@@ -3319,4 +3319,10 @@ angular.module('SimpleCms.Modules.Nodes', [])
             $scope.selectedNode = data;
         });
     };
+
+    $scope.addChild = function (node) {
+        node.children = node.children || [];
+
+        node.children.push({ title: 'new child' });
+    }
 }]);

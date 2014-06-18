@@ -1,7 +1,19 @@
 ﻿<div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
+        <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" ng-click="rootNodes.push({title:'new root'})">Add</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Middle</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Right</button>
+            </div>
+        </div>
         <ul class="nav nav-sidebar">
-            <li ng-class="{active:node.isSelected}" ng-repeat="node in rootNodes"><a href="#" ng-click="selectNode(node)">{{node.title}}</a></li>
+            <li ng-class="{active:node.isSelected}" ng-repeat="node in rootNodes" ng-include="'/node.html'">
+            </li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-show="selectedNode">
@@ -9,3 +21,13 @@
         <p>Stuff goes here.</p>
     </div>
 </div>
+
+
+<script type="text/ng-template" id="/node.html">
+    <a href="#" ng-click="selectNode(node)">{{node.title}}</a>
+    <button type="button" class="btn btn-default" ng-click="addChild(node)"><i class="glyphicon glyphicon-plus"></i></button>
+    <ul ng-show="node.children">
+        <li ng-class="{active:node.isSelected}" ng-repeat="node in node.children" ng-include="'/node.html'">
+        </li>
+    </ul>
+</script>
