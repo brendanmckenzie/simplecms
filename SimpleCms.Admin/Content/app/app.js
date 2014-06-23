@@ -3,9 +3,8 @@
         'ui.router',
         'SimpleCms.Modules.Home',
         'SimpleCms.Modules.Nodes',
-        'SimpleCms.Common.HeaderController',
-        'SimpleCms.Common.NavigationController',
-        'SimpleCms.Page']);
+        'SimpleCms.Common',
+        'SimpleCms.Services']);
 
 app.config(['$urlRouterProvider', '$locationProvider', function ($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');

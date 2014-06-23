@@ -37,23 +37,18 @@
     $scope.refresh();
 
     $scope.selectNode = function (node) {
-        angular.forEach($scope.rootNodes, function (_node) {
-            _node.isSelected = false;
-        });
-        node.isSelected = true;
-
-        Nodes.get(node.Id).success(function (data) {
-            $scope.selectedNode = data;
-        });
+        $scope.selectedNode = node;
     };
 
     $scope.addChild = function (node) {
         node.children = node.children || [];
 
-        node.children.push({ title: 'new child' });
-    }
+        var newNode = { Title: '<new>', Parent: node.Id, ParentNode: node };
 
-    $scope.createNode = {};
+        node.children.push(newNode);
+
+        $scope.selectNode(newNode)
+    }
 
     $scope.save = function (node) {
         if (node.Id) {
@@ -63,4 +58,46 @@
             Nodes.create(node);
         }
     };
+
+    $scope.getIcon = function (node) {
+        if (node == $scope.selectedNode) {
+            if (node.children) {
+                return 'fa-folder-open-o';
+            }
+            else {
+                return 'fa-file-text';
+            }
+        }
+        else {
+            if (node.children) {
+                var hasChildSelected = function (node) {
+                    var ret = false;
+                    if (node.children) {
+                        for (var i = 0; i < node.children.length; i++) {
+                            var child = node.children[i];
+                            if ($scope.selectedNode == child) {
+                                ret = true;
+                                break;
+                            }
+                            else {
+                                ret = hasChildSelected(child);
+                                if (ret) { break; }
+                            }
+                        }
+                    }
+                    return ret;
+                };
+
+                if (hasChildSelected(node)) {
+                    return 'fa-folder-open-o';
+                }
+                else {
+                    return 'fa-folder-o';
+                }
+            }
+            else {
+                return 'fa-file-text-o';
+            }
+        }
+    }
 }]);

@@ -1,37 +1,42 @@
 ﻿<div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        <div class="btn-group btn-group-justified">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" ng-click="rootNodes.push({title:'new root'})">Add</button>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default">Middle</button>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i></button>
-            </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-click="rootNodes.push({Title:'new root'})">Add</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><button class="btn btn-link" ng-click="addChild(selectedNode)" ng-disabled="!selectedNode">Add Child</button></li>
+            </ul>
         </div>
-        <ul class="nav nav-sidebar">
-            <li ng-class="{active:node.isSelected}" ng-repeat="node in rootNodes" ng-include="'/node.html'">
-            </li>
+
+        <ul class="node-tree">
+            <li ng-repeat="node in rootNodes" ng-include="'tree_node'"></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <h1 class="page-header">{{selectedNode.Title}}</h1>
-        <p>Stuff goes here.</p>
-        <form ng-submit="save(createNode)">
-            <input type="text" ng-model="createNode.Title" class="form-control" placeholder="Title" />
+
+        <form ng-submit="save(selectedNode)">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input id="title" type="text" ng-model="selectedNode.Title" class="form-control" placeholder="Title" />
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" ng-model="selectedNode.Data"></textarea>
+            </div>
             <button type="submit" class="btn btn-default">Save</button>
         </form>
     </div>
 </div>
 
 
-<script type="text/ng-template" id="/node.html">
-    <a href="#" ng-click="selectNode(node)">{{node.Title}}</a>
-    <button type="button" class="btn btn-default" ng-click="addChild(node)"><i class="glyphicon glyphicon-plus"></i></button>
+<script type="text/ng-template" id="tree_node">
+    <a href="#" ng-class="{active:node == selectedNode}" ng-click="selectNode(node)">
+        <i class="fa {{getIcon(node)}}"></i> {{node.Title}}</a>
+
     <ul ng-show="node.children">
-        <li ng-class="{active:node.isSelected}" ng-repeat="node in node.children" ng-include="'/node.html'">
-        </li>
+        <li ng-repeat="node in node.children" ng-include="'tree_node'"></li>
     </ul>
 </script>

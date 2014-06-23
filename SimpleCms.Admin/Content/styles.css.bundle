@@ -13,6 +13,7 @@
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
     <file>/content/vendor/bootstrap/less/bootstrap.css</file>
-    <file>/content/site.css</file>
+    <file>/content/vendor/fontawesome/less/font-awesome.css</file>
+    <file>/content/styles/site.css</file>
   </files>
 </bundle>

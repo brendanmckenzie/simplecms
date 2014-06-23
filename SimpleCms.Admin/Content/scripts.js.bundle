@@ -10,11 +10,28 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/content/vendor/angular/angular-ui-router.js</file>
+    <!-- angular -->
+    <file>/content/vendor/angular/angular.js</file>
+    <file>/content/vendor/angular/angular-animate.js</file>
+    
+    <!-- angular ui -->
+    <file>/content/vendor/angular/ui/angular-ui-router.js</file>
+    
+    <!-- bootstrap -->
+    <file>/content/vendor/bootstrap/js/button.js</file>
+    <file>/content/vendor/bootstrap/js/dropdown.js</file>
+
+    <!-- application specific-->
     <file>/content/app/app.js</file>
-    <file>/content/app/common/header-controller.js</file>
-    <file>/content/app/common/navigation-controller.js</file>
-    <file>/content/app/services/page.js</file>
+
+    <file>/content/app/common/__init__.js</file>
+    <file>/content/app/common/HeaderController.js</file>
+
+    <file>/content/app/services/__init__.js</file>
+    <file>/content/app/services/AuthService.js</file>
+    <file>/content/app/services/PageService.js</file>
+    <file>/content/app/services/SessionService.js</file>
+    
     <file>/content/app/modules/home/home.js</file>
     <file>/content/app/modules/nodes/nodes.js</file>
   </files>
